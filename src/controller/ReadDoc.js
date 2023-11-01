@@ -469,6 +469,39 @@ export const generateDoc = ({
             ],
             alignment: AlignmentType.RIGHT,
           }),
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: "Kind regards",
+                break: 3,
+                size: 22,
+                font: "Arial (Headings)",
+              }),
+            ],
+            spacing: {
+              line: 300,
+            },
+          }),
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: `Netcompany`,
+                size: 22,
+                font: "Arial (Headings)",
+                bold: true,
+              }),
+            ],
+          }),
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: `________________________`,
+                size: 22,
+                font: "Arial (Headings)",
+                bold: true,
+              }),
+            ],
+          }),
         ],
 
         properties: {
