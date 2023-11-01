@@ -34,6 +34,7 @@ export const seminarDesc = {
     title: "New Senior Seminar",
     heads1:
       "The purpose of New Senior Seminar is to give new seniors a thorough knowledge about core processes and tools, to deliver projects to Netcompany clients. The seminar is based on Netcompany Methodology and Project- and sub-delivery management. As a foundation to deliver as a team, basic concepts of team dynamics are introduced to the participants.",
+    bullets1: [],
     heads2:
       "This seminar is based on cases, simulations, and roleplay to enrich your learning experience and outcome of the seminar days. We will deep dive into Netcompany methodology via hands-on experience and you will take your project management and task steering skills to the next level. Team collaboration is a key ingredient both regarding your participance and as a central topic on the seminar. The seminar thus requires your active participation.",
     bullets2: [],
