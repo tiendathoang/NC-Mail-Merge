@@ -1,10 +1,11 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { getExcelFiles } from "../../controller/ReadExcelFiles";
 
+import { mainGreen } from "../../constants/constant";
 import SearchBar from "../SearchBar/searchbar";
 import EmployeeDEtail from "../employeedetail/employeedetail";
-import { mainGreen } from "../../constants/constant";
+import { generateDoc } from "../../controller/ReadDoc";
 
 const errorDefaultState = {
   errorState: false,
@@ -107,6 +108,19 @@ function Importfields() {
             Generate mail
           </Button>
         </Col>
+        <Col>
+          <Button
+            onClick={generateDoc}
+            style={{
+              backgroundColor: mainGreen,
+              marginBottom: 15,
+              borderWidth: 0,
+            }}
+          >
+            Generate docx
+          </Button>
+        </Col>
+
         <Col>
           <Button
             onClick={onClickChangeFile}
