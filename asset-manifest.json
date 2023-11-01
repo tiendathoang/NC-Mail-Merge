@@ -1,16 +1,15 @@
 {
   "files": {
     "main.css": "/NC-Mail-Merge/static/css/main.db798329.css",
-    "main.js": "/NC-Mail-Merge/static/js/main.79e950df.js",
+    "main.js": "/NC-Mail-Merge/static/js/main.5d254955.js",
     "static/js/787.7cb32856.chunk.js": "/NC-Mail-Merge/static/js/787.7cb32856.chunk.js",
-    "static/media/logoNC.png": "/NC-Mail-Merge/static/media/logoNC.c56d7b8dbeacaf982102.png",
     "index.html": "/NC-Mail-Merge/index.html",
     "main.db798329.css.map": "/NC-Mail-Merge/static/css/main.db798329.css.map",
-    "main.79e950df.js.map": "/NC-Mail-Merge/static/js/main.79e950df.js.map",
+    "main.5d254955.js.map": "/NC-Mail-Merge/static/js/main.5d254955.js.map",
     "787.7cb32856.chunk.js.map": "/NC-Mail-Merge/static/js/787.7cb32856.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.db798329.css",
-    "static/js/main.79e950df.js"
+    "static/js/main.5d254955.js"
   ]
 }
