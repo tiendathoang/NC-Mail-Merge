@@ -1,14 +1,17 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Button } from "react-bootstrap";
+import { generateDoc } from "../../controller/ReadDoc";
+import { mainGreen, seminarDesc } from "../../constants/constant";
 
 function EmployeeDEtail({ selectedEmployee }) {
   const getLocationDate = (date) => {
-    if (!date) return "Invalid date input";
-    const dateArr = date.split("-");
+    if (!date || date === "NA" || date === "N/A")
+      return { startDate: "", endDate: "" };
+    const dateArr = date.includes("-") ? date.split("-") : [date, date];
     const month = date.slice(-3);
 
     return {
-      startDate: `${dateArr[0]} ${month}`,
+      startDate: `${dateArr[0]} ${date.includes("-") ? month : ""}`,
       endDate: `${dateArr[1]}`,
     };
   };
@@ -49,8 +52,33 @@ function EmployeeDEtail({ selectedEmployee }) {
     return `${day}.${month}.${year}`;
   };
 
+  const seminarDetail = seminarDesc[`${selectedEmployee.firstModuleLocation}`];
+
   return (
-    <Container style={{ margin: 5, marginTop: 20 }}>
+    <Container style={{ marginTop: 20 }}>
+      <Button
+        onClick={() =>
+          generateDoc({
+            employeeName: selectedEmployee.employeeName,
+            employeeInitials: selectedEmployee.initials,
+            module1Location: selectedEmployee.firstModuleLocation,
+            module1StartDate: firstModuleDate.startDate,
+            module1EndDate: firstModuleDate.endDate,
+            secondModuleStartDate: secondModuleDate.startDate,
+            secondModuleEndDate: secondModuleDate.endDate,
+            secondModuleLocation: selectedEmployee.secondModuleLocation,
+            toDay: getDate,
+            seminarDetail,
+          })
+        }
+        style={{
+          backgroundColor: mainGreen,
+          marginBottom: 15,
+          borderWidth: 0,
+        }}
+      >
+        Generate docx
+      </Button>
       <p>
         Dear {selectedEmployee.employeeName},<br />
       </p>
@@ -60,14 +88,32 @@ function EmployeeDEtail({ selectedEmployee }) {
       </p>
       <p>
         <u>
-          Module 1: {selectedEmployee.firstModuleLocation} <br />
+          Module 1: {seminarDetail?.title} <br />
         </u>
         Location: Denmark
         <br />
         Period: {firstModuleDate.startDate} - {firstModuleDate.endDate}
         <br />
-        Course description: [awaits repsective seminar description]
+        Course description:
         <br />
+        {seminarDetail?.heads1 ?? null}
+        <ul>
+          {seminarDetail?.bullets1
+            ? seminarDetail.bullets1.map((item) => <li>{item}</li>)
+            : null}
+        </ul>
+        {seminarDetail?.heads2 ?? null}
+        <ul>
+          {seminarDetail?.bullets2
+            ? seminarDetail.bullets2.map((item) => <li>{item}</li>)
+            : null}
+        </ul>
+        {seminarDetail?.heads3 ?? null}
+        <ul>
+          {seminarDetail?.bullets3
+            ? seminarDetail.bullets3.map((item) => <li>{item}</li>)
+            : null}
+        </ul>
         Agenda: please find the appendix of module 1 attaches with this
         invitation letter
       </p>
@@ -80,7 +126,6 @@ function EmployeeDEtail({ selectedEmployee }) {
         <br />
         Course description:
         <ul>
-          <li>This is placeholder</li>
           <li>
             Module 2 is primarily a module regarding the practical skills needed
             in the business. Employees enjoy the daily feedback, coaching and
@@ -107,42 +152,12 @@ function EmployeeDEtail({ selectedEmployee }) {
         Agenda: please find the appendix of module 2 attaches with this
         invitation letter
       </p>
-      <p>
-        The purpose of the {selectedEmployee.firstModuleLocation} is to give
-        employees an introduction to:
-        <ul>
-          <li>This is a place holder</li>
-          <li>
-            Netcompany and our core values, career model, employee performance
-            appraisal and mentor discussions
-          </li>
-          <li>Their role in Netcompany</li>
-          <li>
-            Protocal during client projects and team-based projects, including
-            professionalism and written and verbal communication
-          </li>
-          <li>
-            Netcompany Methodology, including the disciplines of requirements,
-            analysis and design, implementation and testing, use of
-            documentation and our current tools.
-          </li>
-        </ul>
-      </p>
-      <p>
-        Upon completion of this training:
-        <ul>
-          <li>This is a placeholdeer</li>
-          <li>
-            Have gained an understanding of the role as consultant at
-            Netcompany.
-          </li>
-          <li>Have gained an undersntading of Netcompany methodology.</li>
-          <li>
-            Have increased the awareness of protocol during client projects and
-            team-based projects.
-          </li>
-        </ul>
-      </p>
+      {seminarDetail?.complete}
+      <ul>
+        {seminarDetail?.completeBullets
+          ? seminarDetail.completeBullets.map((item) => <li>{item}</li>)
+          : null}
+      </ul>
       <p>
         Transport: The Company will cover all costs associated with the employee
         travel to Denmark. Accommodation: The Company will provide suitable
@@ -150,46 +165,6 @@ function EmployeeDEtail({ selectedEmployee }) {
         has travel insurance in place to cover all employees travelling abroad.
       </p>
       <p style={{ textAlign: "right", marginRight: 16 }}>{getDate()}</p>
-      {/* <Row>
-        <Col xl={3} class="fs-2">
-          Employee name:
-        </Col>
-        <Col class="fs-2">{selectedEmployee.employeeName}</Col>
-      </Row>
-      <p class="fs-1">Module 1</p>
-      <Row>
-        <Col xl={3}>Location:</Col>
-        <Col>DK</Col>
-      </Row>
-      <Row>
-        <Col xl={3}>Start date:</Col>
-        <Col> {firstModuleDate?.startDate}</Col>
-      </Row>
-      <Row>
-        <Col xl={3}>End date:</Col>
-        <Col>{firstModuleDate?.endDate}</Col>
-      </Row>
-      <Row>
-        <Col>Description: ??</Col>
-      </Row>
-      <p class="fs-1">Module 2</p>
-      <Row>
-        <Col xl={3}>Location:</Col>
-        <Col>{selectedEmployee.secondModuleLocation}</Col>
-      </Row>
-      <Row>
-        <Col xl={3}>Start date:</Col>
-        <Col>{secondModuleDate.startDate}</Col>
-      </Row>
-      <Row>
-        <Col xl={3}>Start date:</Col>
-        <Col>{secondModuleDate.endDate}</Col>
-      </Row>
-      <Row>
-        <Col xl={3}>Agenda: </Col>
-        <Col>???</Col>
-      </Row>
-      {renderPersonalPlan()} */}
     </Container>
   );
 }

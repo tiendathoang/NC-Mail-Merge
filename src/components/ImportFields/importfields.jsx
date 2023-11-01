@@ -21,10 +21,6 @@ function Importfields() {
   const [textDisplay, setTextDisplay] = useState("");
   //   const
 
-  useEffect(() => {
-    console.log("kekeke", file?.files[0].name);
-  }, [file]);
-
   const onClickReset = ({ changeSheet, changeFile }) => {
     if (changeSheet) {
       setExcelSheet(null);
@@ -95,7 +91,7 @@ function Importfields() {
           Please provide excel sheet number
         </Form.Text>
       </div>
-      <Row className="justify-content-md-center" xl={4}>
+      <Row className="justify-content-md-center" xl={6}>
         <Col>
           <Button
             onClick={onClick}
@@ -105,19 +101,7 @@ function Importfields() {
               borderWidth: 0,
             }}
           >
-            Generate mail
-          </Button>
-        </Col>
-        <Col>
-          <Button
-            onClick={generateDoc}
-            style={{
-              backgroundColor: mainGreen,
-              marginBottom: 15,
-              borderWidth: 0,
-            }}
-          >
-            Generate docx
+            Generate template
           </Button>
         </Col>
 
@@ -128,6 +112,7 @@ function Importfields() {
               backgroundColor: mainGreen,
               marginBottom: 15,
               borderWidth: 0,
+              alignSelf: "center",
             }}
           >
             Change file

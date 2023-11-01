@@ -64,7 +64,6 @@ export const getExcelFiles = (
     dateFormat: "mm/dd/yyyy",
   })
     .then((payload) => {
-      console.log(payload);
       if (!payload || !payload?.rows.length) {
         setError({
           errorState: true,
@@ -76,7 +75,6 @@ export const getExcelFiles = (
       setInputDataState(payload.rows);
     })
     .catch((err) => {
-      console.log(err);
       setError({
         errorState: true,
         errorText: err.toString(),
