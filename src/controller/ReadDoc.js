@@ -7,6 +7,13 @@ import {
   ImageRun,
   AlignmentType,
   SectionType,
+  Footer,
+  TextWrappingType,
+  PageNumber,
+  HorizontalPositionRelativeFrom,
+  HorizontalPositionAlign,
+  VerticalPositionRelativeFrom,
+  VerticalPositionAlign,
 } from "docx";
 import { saveAs } from "file-saver";
 import { imageBase64Data } from "../constants/constant";
@@ -16,6 +23,24 @@ const image = new ImageRun({
   transformation: {
     width: 260,
     height: 32,
+  },
+});
+
+const imageFooter = new ImageRun({
+  data: Uint8Array.from(atob(imageBase64Data), (c) => c.charCodeAt(0)),
+  transformation: {
+    width: 83,
+    height: 11,
+  },
+  floating: {
+    horizontalPosition: {
+      relative: HorizontalPositionRelativeFrom.COLUMN,
+      align: HorizontalPositionAlign.LEFT,
+    },
+    verticalPosition: {
+      relative: VerticalPositionRelativeFrom.LINE,
+      align: VerticalPositionAlign.CENTER,
+    },
   },
 });
 
@@ -61,6 +86,38 @@ export const generateDoc = ({
                 ],
                 alignment: AlignmentType.RIGHT,
               }),
+            ],
+          }),
+        },
+        footers: {
+          default: new Footer({
+            children: [
+              new Paragraph({
+                children: [
+                  imageFooter,
+                  new TextRun({
+                    children: [
+                      "© 2023 Netcompany          ",
+                      PageNumber.CURRENT,
+                      " / ",
+                      PageNumber.TOTAL_PAGES,
+                    ],
+                    font: "Arial",
+                    size: 14,
+                  }),
+                ],
+                alignment: AlignmentType.RIGHT,
+              }),
+              // new Paragraph({
+              //   children: [
+              //     new TextRun({
+              //       text: `© 2023 Netcompany ${PageNumber.CURRENT}/${PageNumber.TOTAL_PAGES}`,
+              //       font: "Arial",
+              //       size: 14,
+              //     }),
+              //   ],
+              //   alignment: AlignmentType.RIGHT,
+              // }),
             ],
           }),
         },
